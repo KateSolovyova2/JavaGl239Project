@@ -80,17 +80,27 @@ public class Figures {
 
     public static void renderCircle(GL2 gl, Vector2 posa, double rad, boolean filled) {
         int n = 360;
-        gl.glColor3d(1,0,1);
-        gl.glBegin(GL.GL_TRIANGLE_FAN);
-        gl.glVertex2d(posa.x, posa.y);
-        for (int i = 0; i <= n; i++) {
-           double angle = (2 * Math.PI) / n * i;
-            double  x = rad * Math.cos(angle)+posa.x;
-            double  y = rad * Math.sin(angle)+posa.y;
-            gl.glVertex2d(x, y);
+        if (filled==true) {
+            gl.glColor3d(1, 0, 1);
+            gl.glBegin(GL.GL_TRIANGLE_FAN);
+            gl.glVertex2d(posa.x, posa.y);
+            for (int i = 0; i <= n; i++) {
+                double angle = (2 * Math.PI) / n * i;
+                double x = rad * Math.cos(angle) + posa.x;
+                double y = rad * Math.sin(angle) + posa.y;
+                gl.glVertex2d(x, y);
+            }
+            gl.glEnd();
+        } else {
+            gl.glBegin(GL.GL_LINE_STRIP);
+            for (int i = 0; i <= n; i++) {
+                double angle = (2 * Math.PI) / n * i;
+                double x = rad * Math.cos(angle) + posa.x;
+                double y = rad * Math.sin(angle) + posa.y;
+                gl.glVertex2d(x, y);
+
+            }
+            gl.glEnd();
         }
-        gl.glEnd();
-
-
     }
 }
