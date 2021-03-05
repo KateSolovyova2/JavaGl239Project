@@ -98,7 +98,6 @@ public class Figures {
                 double x = rad * Math.cos(angle) + posa.x;
                 double y = rad * Math.sin(angle) + posa.y;
                 gl.glVertex2d(x, y);
-
             }
             gl.glEnd();
         }
