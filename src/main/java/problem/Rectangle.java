@@ -10,15 +10,26 @@ public class Rectangle {
     public Vector2 c;
     public Vector2 d;
 
-    public Rectangle(Vector2 n, Vector2 n1, Vector2 n2) {
-        this.a = n;
-        this.b = n1;
-        Line k = new Line(n.x, n.y, n1.x, n1.y);
-        Point s = k.nearPoint(n2);
-        this.c = new Vector2(n2.x - s.x + b.x, n2.y - s.y + b.y);
-        this.d = new Vector2(n2.x + s.x - a.x, n2.x + s.x + a.x);
-    }
+    public Rectangle(Vector2 a, Vector2 b, Vector2 p) {
+        this.a = a;
+        this.b = b;
+        Line k = new Line(a.x, a.y, b.x, b.y);
 
+        Point s = k.nearPoint(p);
+
+        Vector2 l= new Vector2(s.x, s.y);
+        Vector2 lp= p.minus(l);
+
+        this.c = lp.plus(b);
+        this.d = lp.plus(a);
+    }
+     public static Rectangle getRandomRectangle(){
+        Random random = new Random();
+        double x = random.nextDouble()*2-1;
+                double y = random.nextDouble()*2-1;
+
+
+     }
     public void render(GL2 gl) {
         Figures.renderQuads(gl, a, b, c, d, false);
     }

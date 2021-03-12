@@ -45,8 +45,9 @@ public class Problem {
      * @param y      координата Y точки
      * @param setVal номер множества
      */
-    public void addPoint(double x, double y, int setVal) {
-        Point point = new Point(x, y, setVal);
+    public void addPoint(double x, double y) {
+
+        Point point = new Point(x, y);
         points.add(point);
     }
 
@@ -131,10 +132,11 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-        Vector2 s = new Vector2(0.5,0.2);
-        Vector2 k = new Vector2(0.5,0.6);
-        Vector2 o = new Vector2(0.9,0.1);
-Rectangle a = new Rectangle(s, k, o);
+        Vector2 s = new Vector2(0.5, 0.2);
+        Vector2 k = new Vector2(0.5, 0.6);
+        Vector2 o = new Vector2(0.9, 0.1);
+
+        Rectangle a = new Rectangle(s, k, o);
         a.render(gl);
     }
 }
