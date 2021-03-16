@@ -28,6 +28,18 @@ public class Form extends JFrame {
     private JButton addPoint;
     private JButton randomRectangleBtn;
     private JTextField rectangleCntField;
+    private JTextField xRectangle3Field;
+    private JTextField yRectangle3Field;
+    private JTextField xRectangle2Field;
+    private JTextField yRectangle2Field;
+    private JTextField xRectangle1Field;
+    private JTextField yRectangle1Field;
+    private JTextField xTextField;
+    private JTextArea xTextField3;
+    private JTextArea xTextField2;
+    private JTextArea yTextArea;
+    private JTextArea yTextArea1;
+    private JTextArea yTextArea2;
     /**
      * таймер
      */
