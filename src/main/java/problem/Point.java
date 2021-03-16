@@ -2,6 +2,8 @@ package problem;
 
 import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -46,10 +48,12 @@ public class Point {
         this.y = y;
         this.setNumber = setNumber;
     }
-public Point(double x, double y){
-    this.x = x;
-    this.y = y;
-}
+
+    public Point(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
     /**
      * Получить случайную точку
      *
@@ -57,10 +61,9 @@ public Point(double x, double y){
      */
     static Point getRandomPoint() {
         Random r = new Random();
-        double nx = (double) r.nextInt(50) / 25 - 1;
-        double ny = (double) r.nextInt(50) / 25 - 1;
-        int nSetVal = r.nextInt(2);
-        return new Point(nx, ny, nSetVal);
+        double nx = r.nextDouble() * 2 - 1;
+        double ny = r.nextDouble() * 2 - 1;
+        return new Point(nx, ny);
     }
 
     /**

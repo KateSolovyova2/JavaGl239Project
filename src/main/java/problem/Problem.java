@@ -5,6 +5,8 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import static problem.Rectangle.getRandomRectangle;
+
 /**
  * Класс задачи
  */
@@ -13,8 +15,11 @@ public class Problem {
      * текст задачи
      */
     public static final String PROBLEM_TEXT = "ПОСТАНОВКА ЗАДАЧИ:\n" +
-            "Заданы два множества точек в пространстве.\n" +
-            "Требуется построить пересечения и разность этих множеств";
+            "На плоскости задано множество точек, и прямоугольник. Множество точек образует\n" +
+            "все возможные прямые, которые могут быть построены парами точек множества.\n" +
+            "Найти такую прямую (и такие две точки, через которые она проходит), что эта прямая\n" +
+            "пересекает указанный прямоугольник, и при этом длина отрезка прямой,\n находящейся внутри прямоугольника, максимальна.\n" +
+            "В качестве ответа: выделить найденные две точки";
 
     /**
      * заголовок окна
@@ -30,20 +35,22 @@ public class Problem {
      * список точек
      */
     private ArrayList<Point> points;
+    private ArrayList<Rectangle> rectangles;
 
     /**
      * Конструктор класса задачи
      */
     public Problem() {
         points = new ArrayList<>();
+        rectangles = new ArrayList<>();
     }
 
     /**
      * Добавить точку
      *
-     * @param x      координата X точки
-     * @param y      координата Y точки
-     * @param setVal номер множества
+     * @param x        координата X точки
+     * @param y        координата Y точки
+     * @param //setVal номер множества
      */
     public void addPoint(double x, double y) {
 
@@ -119,11 +126,20 @@ public class Problem {
         }
     }
 
+
+    public void addRandomRectangles(int n) {
+        for (int i = 0; i < n; i++) {
+            Rectangle r = Rectangle.getRandomRectangle();
+            rectangles.add(r);
+        }
+    }
+
     /**
      * Очистить задачу
      */
     public void clear() {
         points.clear();
+        rectangles.clear();
     }
 
     /**
@@ -132,11 +148,10 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-        Vector2 s = new Vector2(0.5, 0.2);
-        Vector2 k = new Vector2(0.5, 0.6);
-        Vector2 o = new Vector2(0.9, 0.1);
-
-        Rectangle a = new Rectangle(s, k, o);
-        a.render(gl);
+        for (Rectangle r : rectangles)
+            r.render(gl);
+        for (Point p : points)
+            p.render(gl);
     }
+
 }
