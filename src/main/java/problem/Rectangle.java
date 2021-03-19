@@ -38,7 +38,10 @@ public class Rectangle {
         double y2 = random.nextDouble() * 2 - 1;
         return new Rectangle(new Vector2(x, y), new Vector2(x1, y1), new Vector2(x2, y2));
     }
-
+    public static boolean istrue(Line l){
+        if() return true;
+        return false;
+    }
     public void render(GL2 gl) {
         Figures.renderQuads(gl, a, b, c, d, false);
     }

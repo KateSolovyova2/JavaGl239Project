@@ -73,14 +73,20 @@ public class Problem {
      */
     public void solve() {
         // перебираем пары точек
+        int length=0;
         for (Point p : points) {
             for (Point p2 : points) {
                 // если точки являются разными
                 if (p != p2) {
                     // если координаты у них совпадают
-                    if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
-                        p.isSolution = true;
-                        p2.isSolution = true;
+                    //if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
+                       // p.isSolution = true;
+                        //p2.isSolution = true;
+                    Line l = new Line(p.x, p.y, p2.x, p2.y);
+                    if(Rectangle.istrue(l)){
+
+                    }else{
+                        length=length;
                     }
                 }
             }
