@@ -28,18 +28,15 @@ public class Form extends JFrame {
     private JButton addPoint;
     private JButton randomRectangleBtn;
     private JTextField rectangleCntField;
-    private JTextField xRectangle3Field;
-    private JTextField yRectangle3Field;
-    private JTextField xRectangle2Field;
-    private JTextField yRectangle2Field;
-    private JTextField xRectangle1Field;
-    private JTextField yRectangle1Field;
-    private JTextField xTextField;
-    private JTextArea xTextField3;
-    private JTextArea xTextField2;
-    private JTextArea yTextArea;
-    private JTextArea yTextArea1;
-    private JTextArea yTextArea2;
+    private JTextField y1RectangleFiedl;
+    private JTextField y2RectangleFiedl;
+    private JTextField x2RectangleFiedl;
+    private JTextField x1RectangleFiedl;
+    private JTextField x3RectangleFiedl;
+    private JTextField y3RectangleFiedl;
+    private JButton setRectangleBtn;
+    private JTextField pointXField;
+    private JTextField pointYField;
     /**
      * таймер
      */
@@ -98,11 +95,28 @@ public class Form extends JFrame {
         addPoint.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                double x = Double.parseDouble(xPointField.getText());
-                double y = Double.parseDouble(yPointField.getText());
+                double x = Double.parseDouble(pointXField.getText());
+                double y = Double.parseDouble(pointYField.getText());
                 renderer.problem.addPoint(x, y);
             }
         });
+
+        setRectangleBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double x1 = Double.parseDouble(x1RectangleFiedl.getText());
+                double y1 = Double.parseDouble(y1RectangleFiedl.getText());
+
+                double x2 = Double.parseDouble(x2RectangleFiedl.getText());
+                double y2 = Double.parseDouble(y2RectangleFiedl.getText());
+
+                double x3 = Double.parseDouble(x3RectangleFiedl.getText());
+                double y3 = Double.parseDouble(y3RectangleFiedl.getText());
+
+                renderer.problem.setRectangle(x1, y1, x2, y2, x3, y3);
+            }
+        });
+
         randomPointBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,7 +126,7 @@ public class Form extends JFrame {
         randomRectangleBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                renderer.problem.addRandomRectangles(Integer.parseInt(rectangleCntField.getText()));
+                renderer.problem.setRandomRectangles();
             }
         });
 

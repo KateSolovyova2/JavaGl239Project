@@ -11,6 +11,8 @@ public class Rectangle {
     public Vector2 c;
     public Vector2 d;
 
+    public Vector2 p;
+
     public Rectangle(Vector2 a, Vector2 b, Vector2 p) {
         this.a = a;
         this.b = b;
@@ -23,6 +25,7 @@ public class Rectangle {
 
         this.c = lp.plus(b);
         this.d = lp.plus(a);
+        this.p = p;
     }
 
     public static Rectangle getRandomRectangle() {

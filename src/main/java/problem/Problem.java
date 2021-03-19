@@ -35,14 +35,13 @@ public class Problem {
      * список точек
      */
     private ArrayList<Point> points;
-    private ArrayList<Rectangle> rectangles;
+    private Rectangle rectangle;
 
     /**
      * Конструктор класса задачи
      */
     public Problem() {
         points = new ArrayList<>();
-        rectangles = new ArrayList<>();
     }
 
     /**
@@ -56,6 +55,17 @@ public class Problem {
 
         Point point = new Point(x, y);
         points.add(point);
+    }
+
+    /**
+     * Добавить точку
+     *
+     * @param x        координата X точки
+     * @param y        координата Y точки
+     * @param //setVal номер множества
+     */
+    public void setRectangle(double x, double y, double x2, double y2, double x3, double y3) {
+        rectangle = new Rectangle(new Vector2(x, y), new Vector2(x2, y2), new Vector2(x3, y3));
     }
 
     /**
@@ -86,12 +96,18 @@ public class Problem {
             File file = new File(FILE_NAME);
             Scanner sc = new Scanner(file);
             // пока в файле есть непрочитанные строки
+            double x1 = sc.nextDouble();
+            double y1 = sc.nextDouble();
+            double x2 = sc.nextDouble();
+            double y2 = sc.nextDouble();
+            double x3 = sc.nextDouble();
+            double y3 = sc.nextDouble();
+            rectangle = new Rectangle(new Vector2(x1, y1), new Vector2(x2, y2),new Vector2(x3, y3));
             while (sc.hasNextLine()) {
                 double x = sc.nextDouble();
                 double y = sc.nextDouble();
-                int setVal = sc.nextInt();
                 sc.nextLine();
-                Point point = new Point(x, y, setVal);
+                Point point = new Point(x, y);
                 points.add(point);
             }
         } catch (Exception ex) {
@@ -105,8 +121,9 @@ public class Problem {
     public void saveToFile() {
         try {
             PrintWriter out = new PrintWriter(new FileWriter(FILE_NAME));
+            out.printf("%.2f %.2f %.2f %.2f %.2f %.2f\n", rectangle.a.x, rectangle.a.y, rectangle.b.x, rectangle.b.y, rectangle.p.x, rectangle.p.y);
             for (Point point : points) {
-                out.printf("%.2f %.2f %d\n", point.x, point.y, point.setNumber);
+                out.printf("%.2f %.2f\n", point.x, point.y);
             }
             out.close();
         } catch (IOException ex) {
@@ -127,11 +144,8 @@ public class Problem {
     }
 
 
-    public void addRandomRectangles(int n) {
-        for (int i = 0; i < n; i++) {
-            Rectangle r = Rectangle.getRandomRectangle();
-            rectangles.add(r);
-        }
+    public void setRandomRectangles() {
+        rectangle = Rectangle.getRandomRectangle();
     }
 
     /**
@@ -139,7 +153,7 @@ public class Problem {
      */
     public void clear() {
         points.clear();
-        rectangles.clear();
+        rectangle = null;
     }
 
     /**
@@ -148,8 +162,8 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-        for (Rectangle r : rectangles)
-            r.render(gl);
+        if (rectangle != null)
+            rectangle.render(gl);
         for (Point p : points)
             p.render(gl);
     }
