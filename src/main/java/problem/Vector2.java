@@ -134,14 +134,6 @@ class Vector2
             }
         }
     }
-    public double phi(){
-        if(x==0 && y>0) return Math.PI/2;
-        if(x==0 && y<0) return -Math.PI/2;
-        if(y==0) return 0;
-        if(y>0 && x>0) return Math.asin(y/Math.sqrt(x*x+y*y));
-        if(y<0 && x<0) return Math.asin(y/Math.sqrt(x*x+y*y));
-        if(y<0 && x>0) return Math.asin(y/Math.sqrt(x*x+y*y));
-        return Math.PI-Math.asin(y/Math.sqrt(x*x+y*y));
-    }
+
 
 }

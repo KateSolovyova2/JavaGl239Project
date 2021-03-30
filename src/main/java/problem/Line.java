@@ -2,9 +2,9 @@ package problem;
 
 class Line
 {
-    private double A;
-   private double B;
-    private double C;
+    public double A;
+    public double B;
+    public double C;
 
     public Line(double x, double y, double x2, double y2){
         this.A=y-y2;

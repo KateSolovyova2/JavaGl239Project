@@ -27,7 +27,30 @@ public class Rectangle {
         this.d = lp.plus(a);
         this.p = p;
     }
-
+    public Vector2 point2(Vector2 v, Vector2 v1){
+        Line r = new Line(v.x, v.y, v1.x, v1.y);
+        double x2=(-r.C-r.B*a.y)/r.A;
+        double x3=(-r.C-r.B*c.y)/r.A;
+        double y2=(-r.C-r.A*a.x)/r.B;
+        double y3=(-r.C-r.A*c.x)/r.B;
+        if(y3>=a.y && y3<=b.y || y3>=b.y && y3<=c.y || y3>=c.y && y3<=d.y || y3>=d.y && y3<=a.y) return new Vector2(a.x,y3); else
+        if(y2>=a.y && y2<=b.y || y2>=b.y && y2<=c.y || y2>=c.y && y2<=d.y || y2>=d.y && y2<=a.y) return new Vector2(a.x,y2); else
+        if(x3>=a.x && x3<=b.x || x3>=b.x && x3<=c.x || x3>=c.x && x3<=d.x || x3>=d.x && x3<=a.x) return new Vector2(x3,c.y); else
+        if(x2>=a.x && x2<=b.x || x2>=b.x && x2<=c.x || x2>=c.x && x2<=d.x || x2>=d.x && x2<=a.x) return new Vector2(x2,a.y);else
+            return null;
+    }
+    public Vector2 point1(Vector2 v, Vector2 v1){
+        Line r = new Line(v.x, v.y, v1.x, v1.y);
+        double x2=(-r.C-r.B*a.y)/r.A;
+        double x3=(-r.C-r.B*c.y)/r.A;
+        double y2=(-r.C-r.A*a.x)/r.B;
+        double y3=(-r.C-r.A*c.x)/r.B;
+        if(x2>=a.x && x2<=b.x || x2>=b.x && x2<=c.x || x2>=c.x && x2<=d.x || x2>=d.x && x2<=a.x) return new Vector2(x2,a.y);else
+        if(x3>=a.x && x3<=b.x || x3>=b.x && x3<=c.x || x3>=c.x && x3<=d.x || x3>=d.x && x3<=a.x) return new Vector2(x3,c.y); else
+        if(y2>=a.y && y2<=b.y || y2>=b.y && y2<=c.y || y2>=c.y && y2<=d.y || y2>=d.y && y2<=a.y) return new Vector2(a.x,y2); else
+        if(y3>=a.y && y3<=b.y || y3>=b.y && y3<=c.y || y3>=c.y && y3<=d.y || y3>=d.y && y3<=a.y) return new Vector2(a.x,y3); else
+            return null;
+    }
     public static Rectangle getRandomRectangle() {
         Random random = new Random();
         double x = random.nextDouble() * 2 - 1;
@@ -38,10 +61,7 @@ public class Rectangle {
         double y2 = random.nextDouble() * 2 - 1;
         return new Rectangle(new Vector2(x, y), new Vector2(x1, y1), new Vector2(x2, y2));
     }
-    public static boolean istrue(Line l){
-        if() return true;
-        return false;
-    }
+
     public void render(GL2 gl) {
         Figures.renderQuads(gl, a, b, c, d, false);
     }

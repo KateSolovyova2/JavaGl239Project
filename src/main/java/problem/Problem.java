@@ -1,5 +1,6 @@
 package problem;
 
+import javax.media.opengl.GL;
 import javax.media.opengl.GL2;
 import java.io.*;
 import java.util.ArrayList;
@@ -36,6 +37,8 @@ public class Problem {
      */
     private ArrayList<Point> points;
     private Rectangle rectangle;
+    Point pointA;
+    Point pointB;
 
     /**
      * Конструктор класса задачи
@@ -72,26 +75,36 @@ public class Problem {
      * Решить задачу
      */
     public void solve() {
+        Vector2 v1, v2;
         // перебираем пары точек
-        int length=0;
+        double length = 0;
+        double maxlength = 0;
         for (Point p : points) {
             for (Point p2 : points) {
                 // если точки являются разными
                 if (p != p2) {
                     // если координаты у них совпадают
                     //if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
-                       // p.isSolution = true;
-                        //p2.isSolution = true;
-                    Line l = new Line(p.x, p.y, p2.x, p2.y);
-                    if(Rectangle.istrue(l)){
-
-                    }else{
-                        length=length;
+                    // p.isSolution = true;
+                    //p2.isSolution = true;
+                    Vector2 n = new Vector2(rectangle.point1(new Vector2(p.x, p.y), new Vector2(p2.x, p2.y)));
+                    Vector2 c = new Vector2(rectangle.point2(new Vector2(p.x, p.y), new Vector2(p2.x, p2.y)));
+                    if (n == c) {
+                        length = 0;
+                    } else {
+                        length = Math.sqrt((n.x - c.x) * (n.x - c.x) + (n.y - c.y) * (n.y - c.y));
+                        if (length >= maxlength) {
+                            maxlength = length;
+                            pointA = new Point(p.x, p.y);
+                            pointB = new Point(p2.x, p2.y);
+                        }
                     }
                 }
             }
         }
     }
+
+
 
     /**
      * Загрузить задачу из файла
@@ -108,7 +121,7 @@ public class Problem {
             double y2 = sc.nextDouble();
             double x3 = sc.nextDouble();
             double y3 = sc.nextDouble();
-            rectangle = new Rectangle(new Vector2(x1, y1), new Vector2(x2, y2),new Vector2(x3, y3));
+            rectangle = new Rectangle(new Vector2(x1, y1), new Vector2(x2, y2), new Vector2(x3, y3));
             while (sc.hasNextLine()) {
                 double x = sc.nextDouble();
                 double y = sc.nextDouble();
@@ -160,6 +173,8 @@ public class Problem {
     public void clear() {
         points.clear();
         rectangle = null;
+        pointA = null;
+        pointB = null;
     }
 
     /**
@@ -168,10 +183,24 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
+        gl.glColor3d(0, 1, 0);
         if (rectangle != null)
             rectangle.render(gl);
         for (Point p : points)
             p.render(gl);
+        gl.glColor3d(1,0,0);
+        if(pointA!=null){
+            gl.glBegin(GL.GL_POINTS);
+            gl.glVertex2d(pointA.x,pointA.y);
+            gl.glEnd();
+        }
+        gl.glColor3d(0, 1, 0);
+        if(pointB!=null){
+            gl.glBegin(GL.GL_POINTS);
+            gl.glVertex2d(pointB.x,pointB.y);
+            gl.glEnd();
+        }
     }
+
 
 }
