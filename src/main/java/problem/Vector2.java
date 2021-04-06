@@ -19,8 +19,11 @@ class Vector2
         this.y=y;
     }
     public Vector2(Vector2 v){
-        this.x=v.x;
-        this.y=v.y;
+        if(v!=null) {
+            this.x = v.x;
+            this.y = v.y;
+        }else {this.x=0;
+        this.y=0;}
     }
     public double getX(){
         return x;

@@ -77,16 +77,13 @@ public class Problem {
     public void solve() {
         Vector2 v1, v2;
         // перебираем пары точек
-        double length = 0;
+        double length;
         double maxlength = 0;
         for (Point p : points) {
             for (Point p2 : points) {
                 // если точки являются разными
                 if (p != p2) {
-                    // если координаты у них совпадают
-                    //if (Math.abs(p.x - p2.x) < 0.0001 && Math.abs(p.y - p2.y) < 0.0001) {
-                    // p.isSolution = true;
-                    //p2.isSolution = true;
+
                     Vector2 n = new Vector2(rectangle.point1(new Vector2(p.x, p.y), new Vector2(p2.x, p2.y)));
                     Vector2 c = new Vector2(rectangle.point2(new Vector2(p.x, p.y), new Vector2(p2.x, p2.y)));
                     if (n == c) {
