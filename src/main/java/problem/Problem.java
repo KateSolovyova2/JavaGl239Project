@@ -83,12 +83,15 @@ public class Problem {
             for (Point p2 : points) {
                 // если точки являются разными
                 if (p != p2) {
-
-                    Vector2 n = new Vector2(rectangle.point1(new Vector2(p.x, p.y), new Vector2(p2.x, p2.y)));
-                    Vector2 c = new Vector2(rectangle.point2(new Vector2(p.x, p.y), new Vector2(p2.x, p2.y)));
-                    if (n == c) {
+                    ArrayList<Vector2> intersectionPoints = rectangle.intersection(
+                            new Vector2(p.x, p.y), new Vector2(p2.x, p2.y)
+                    );
+                    if (intersectionPoints.size() != 2) {
+                        System.out.println("size not 2 "+intersectionPoints.size());
                         length = 0;
                     } else {
+                        Vector2 n = intersectionPoints.get(0);
+                        Vector2 c = intersectionPoints.get(1);
                         length = Math.sqrt((n.x - c.x) * (n.x - c.x) + (n.y - c.y) * (n.y - c.y));
                         if (length >= maxlength) {
                             maxlength = length;
@@ -100,7 +103,6 @@ public class Problem {
             }
         }
     }
-
 
 
     /**
@@ -185,16 +187,16 @@ public class Problem {
             rectangle.render(gl);
         for (Point p : points)
             p.render(gl);
-        gl.glColor3d(1,0,0);
-        if(pointA!=null){
+        gl.glColor3d(1, 0, 0);
+        if (pointA != null) {
             gl.glBegin(GL.GL_POINTS);
-            gl.glVertex2d(pointA.x,pointA.y);
+            gl.glVertex2d(pointA.x, pointA.y);
             gl.glEnd();
         }
         gl.glColor3d(0, 1, 0);
-        if(pointB!=null){
+        if (pointB != null) {
             gl.glBegin(GL.GL_POINTS);
-            gl.glVertex2d(pointB.x,pointB.y);
+            gl.glVertex2d(pointB.x, pointB.y);
             gl.glEnd();
         }
     }
