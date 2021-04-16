@@ -83,11 +83,11 @@ public class Problem {
             for (Point p2 : points) {
                 // если точки являются разными
                 if (p != p2) {
-                    ArrayList<Vector2> intersectionPoints = rectangle.intersection(
+                    ArrayList<Vector2> intersectionPoints = rectangle.intersection2(
                             new Vector2(p.x, p.y), new Vector2(p2.x, p2.y)
                     );
                     if (intersectionPoints.size() != 2) {
-                        System.out.println("size not 2 "+intersectionPoints.size());
+                        System.out.println("size not 2 "+intersectionPoints);
                         length = 0;
                     } else {
                         Vector2 n = intersectionPoints.get(0);
@@ -97,6 +97,7 @@ public class Problem {
                             maxlength = length;
                             pointA = new Point(p.x, p.y);
                             pointB = new Point(p2.x, p2.y);
+                            System.out.println("found");
                         }
                     }
                 }

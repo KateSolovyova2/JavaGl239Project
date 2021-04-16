@@ -29,34 +29,35 @@ public class Rectangle {
         this.p = p;
     }
 
-    public ArrayList<Vector2> intersection(Vector2 v, Vector2 v1) {
+    public ArrayList<Vector2> intersection2(Vector2 v, Vector2 v1) {
         ArrayList<Vector2> lst = new ArrayList<>();
 
-        Line r = new Line(v.x, v.y, v1.x, v1.y);
-
-        double x2 = (-r.C - r.B * a.y) / r.A;
-        double x3 = (-r.C - r.B * c.y) / r.A;
-        double y2 = (-r.C - r.A * a.x) / r.B;
-        double y3 = (-r.C - r.A * c.x) / r.B;
+        Line l = new Line(v.x, v.y, v1.x, v1.y);
 
 
-        if (y3 >= a.y && y3 <= b.y || y3 >= b.y && y3 <= c.y || y3 >= c.y && y3 <= d.y || y3 >= d.y && y3 <= a.y)
-            lst.add(new Vector2(a.x, y3));
-        else if (y2 >= a.y && y2 <= b.y || y2 >= b.y && y2 <= c.y || y2 >= c.y && y2 <= d.y || y2 >= d.y && y2 <= a.y)
-            lst.add(new Vector2(a.x, y2));
-        else if (x3 >= a.x && x3 <= b.x || x3 >= b.x && x3 <= c.x || x3 >= c.x && x3 <= d.x || x3 >= d.x && x3 <= a.x)
-            lst.add(new Vector2(x3, c.y));
-        else if (x2 >= a.x && x2 <= b.x || x2 >= b.x && x2 <= c.x || x2 >= c.x && x2 <= d.x || x2 >= d.x && x2 <= a.x)
-            lst.add(new Vector2(x2, a.y));
 
-        if (x2 >= a.x && x2 <= b.x || x2 >= b.x && x2 <= c.x || x2 >= c.x && x2 <= d.x || x2 >= d.x && x2 <= a.x)
-            lst.add(new Vector2(x2, a.y));
-        else if (x3 >= a.x && x3 <= b.x || x3 >= b.x && x3 <= c.x || x3 >= c.x && x3 <= d.x || x3 >= d.x && x3 <= a.x)
-            lst.add(new Vector2(x3, c.y));
-        else if (y2 >= a.y && y2 <= b.y || y2 >= b.y && y2 <= c.y || y2 >= c.y && y2 <= d.y || y2 >= d.y && y2 <= a.y)
-            lst.add(new Vector2(a.x, y2));
-        else if (y3 >= a.y && y3 <= b.y || y3 >= b.y && y3 <= c.y || y3 >= c.y && y3 <= d.y || y3 >= d.y && y3 <= a.y)
-            lst.add(new Vector2(a.x, y3));
+        Line l1 = new Line(a.x,a.y,b.x,b.y);
+        Vector2 pp1 = new Vector2(l1.intersection(l));
+        if(pp1!=null && ((pp1.x>=a.x && pp1.x<=b.x) || (pp1.x>=b.x && pp1.x<=a.x) && (pp1.y>=a.y && pp1.y<=b.y) || (pp1.y>=b.y && pp1.y<=a.y))) {
+            lst.add(new Vector2(pp1.x, pp1.y));
+        }
+
+        Line l2 = new Line(b.x,b.y,c.x,c.y);
+        Vector2 pp2 = new Vector2(l2.intersection(l));
+        if(pp1!=null && ((pp2.x>=c.x && pp2.x<=b.x) || (pp2.x>=b.x && pp2.x<=c.x) && (pp2.y>=c.y && pp2.y<=b.y) || (pp2.y>=b.y && pp2.y<=c.y))) {
+            lst.add(new Vector2(pp2.x, pp2.y));
+        }
+        Line l3 = new Line(d.x,d.y,c.x,c.y);
+        Vector2 pp3 = new Vector2(l3.intersection(l));
+        if(pp1!=null && ((pp3.x>=c.x && pp3.x<=d.x) || (pp3.x>=d.x && pp3.x<=c.x) && (pp3.y>=c.y && pp3.y<=d.y) || (pp3.y>=d.y && pp3.y<=c.y))) {
+            lst.add(new Vector2(pp3.x, pp3.y));
+        }
+
+        Line l4 = new Line(d.x,d.y,a.x,a.y);
+        Vector2 pp4 = new Vector2(l4.intersection(l));
+        if(pp1!=null && ((pp3.x>=a.x && pp3.x<=d.x) || (pp3.x>=d.x && pp3.x<=a.x) && (pp3.y>=a.y && pp3.y<=d.y) || (pp3.y>=d.y && pp3.y<=a.y))) {
+            lst.add(new Vector2(pp4.x, pp4.y));
+        }
 
         return lst;
     }

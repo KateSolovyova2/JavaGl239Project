@@ -19,12 +19,12 @@ class Line
         return false;
 
     }
-    public Point intersection(Line l){
+    public Vector2 intersection(Line l){
         if(isParallel(l)) return null;
         else{
             double x = (C*(-l.B)-(-B)*l.C)/((-B)*l.A-A*(-l.B));
             double y=(C*l.A-A*l.C)/((-B)*l.A-A*(-l.B));
-            return new Point(x, y);
+            return new Vector2(x, y);
         }
     }
     public boolean oneSide(Point a, Point b){
