@@ -77,7 +77,7 @@ public class Problem {
     public void solve() {
         Vector2 v1, v2;
         // перебираем пары точек
-        double length;
+        double length = 0;
         double maxlength = 0;
         for (Point p : points) {
             for (Point p2 : points) {
@@ -87,7 +87,7 @@ public class Problem {
                             new Vector2(p.x, p.y), new Vector2(p2.x, p2.y)
                     );
                     if (intersectionPoints.size() != 2) {
-                        System.out.println("size not 2 "+intersectionPoints);
+                        //System.out.println("size not 2 "+intersectionPoints);
                         length = 0;
                     } else {
                         Vector2 n = intersectionPoints.get(0);
@@ -95,9 +95,8 @@ public class Problem {
                         length = Math.sqrt((n.x - c.x) * (n.x - c.x) + (n.y - c.y) * (n.y - c.y));
                         if (length >= maxlength) {
                             maxlength = length;
-                            pointA = new Point(p.x, p.y);
-                            pointB = new Point(p2.x, p2.y);
-                            System.out.println("found");
+                            pointA = p;
+                            pointB = p2;
                         }
                     }
                 }
@@ -183,23 +182,22 @@ public class Problem {
      * @param gl переменная OpenGL для рисования
      */
     public void render(GL2 gl) {
-        gl.glColor3d(0, 1, 0);
+        gl.glColor3d(1, 1, 1);
         if (rectangle != null)
             rectangle.render(gl);
         for (Point p : points)
             p.render(gl);
+
         gl.glColor3d(1, 0, 0);
         if (pointA != null) {
+            gl.glPointSize(7);
             gl.glBegin(GL.GL_POINTS);
             gl.glVertex2d(pointA.x, pointA.y);
-            gl.glEnd();
-        }
-        gl.glColor3d(0, 1, 0);
-        if (pointB != null) {
-            gl.glBegin(GL.GL_POINTS);
             gl.glVertex2d(pointB.x, pointB.y);
             gl.glEnd();
+            gl.glPointSize(1);
         }
+
     }
 
 

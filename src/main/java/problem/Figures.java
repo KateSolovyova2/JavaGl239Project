@@ -26,7 +26,7 @@ public class Figures {
     }
 
     public static void renderTriangle(GL2 gl, Vector2 posa, Vector2 posb, Vector2 posc, boolean filled) {
-        gl.glColor3d(0.5,1,0);
+
         if(filled == true) {
             gl.glBegin(GL.GL_TRIANGLES);
             gl.glVertex2d(posa.x, posa.y);
@@ -50,7 +50,7 @@ public class Figures {
     }
 
     public static void renderQuads(GL2 gl, Vector2 posa, Vector2 posb, Vector2 posc, Vector2 posd, boolean filled) {
-        gl.glColor3d(0,1,0.3);
+
         if (filled == true) {
             gl.glBegin(GL2GL3.GL_QUADS);
             gl.glVertex2d(posa.x, posa.y);
