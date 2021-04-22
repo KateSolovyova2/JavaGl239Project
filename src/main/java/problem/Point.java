@@ -69,6 +69,7 @@ public class Point {
 //                    break;
 //            }
         gl.glPointSize(3);
+        gl.glColor3d(0.0, 1.0, 0.0);
         gl.glBegin(GL.GL_POINTS);
         gl.glVertex2d(x, y);
         gl.glEnd();
